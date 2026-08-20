@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ණය ඉල්ලුම්පත්‍රය - කාර්ය සාධන හා බෞද්ධ සමිතිය</title>
     <!-- html2pdf පුස්තකාලය (Library) එකතු කිරීම -->
-    <script src="https://cdnjs.cloudflare.com/ajax5/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -180,11 +180,11 @@
     
     <h3 style="text-align: center; color: #333; margin-top: 0; margin-bottom: 8px; font-size: 15px;">ණය ඉල්ලුම්පත්‍රය (Loan Application)</h3>
     
-    <form action="https://formsubmit.co/psbowatenna@gmail.com" method="POST">
+    <!-- පෝරමය Submit වූ පසු WhatsApp පණිවිඩය ජනනය වීමට handleFormSubmit ක්‍රියාවිය එකතු කර ඇත -->
+    <form id="actualForm" action="https://formsubmit.co/psbowatenna@gmail.com" method="POST" onsubmit="handleFormSubmit(event)">
         
         <input type="hidden" name="_subject" value="නව ණය ඉල්ලුම්පත්‍රයක් - බෝවත්තැන්න">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_autoresponse" value="ඔබගේ ණය ඉල්ලුම්පත්‍රය සාර්ථකව ලැබුණි. කාර්ය සාධන හා බෞද්ධ සමිතිය - බෝවත්තැන්න විසින් එය සමාලෝචනය කර ඉදිරි කටයුතු සිදු කරනු ඇත. ස්තුතියි!">
 
         <!-- Section 1 -->
         <div class="section-title">1. පෞද්ගලික තොරතුරු</div>
@@ -205,8 +205,8 @@
         </div>
 
         <div class="form-group">
-            <label for="phone">දුරකථන අංකය (Phone Number):</label>
-            <input type="text" id="phone" name="දුරකථන අංකය" required>
+            <label for="phone">දුරකථන අංකය (WhatsApp අංකය ලෙස ඇතුළත් කරන්න):</label>
+            <input type="text" id="phone" name="දුරකථන අංකය" placeholder="උදා: 0771234567" required>
         </div>
 
         <div class="form-group">
@@ -353,6 +353,7 @@
 </div>
 
 <script>
+    // PDF ඩවුන්ලෝඩ් කිරීමේ ක්‍රියාවලිය
     function downloadPDF() {
         const element = document.getElementById('loanForm');
         const opt = {
@@ -362,9 +363,31 @@
             html2canvas:  { scale: 2, useCORS: true },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
-
-        // html2pdf භාවිතයෙන් සෘජුවම PDF එක ඩවුන්ලෝඩ් කිරීම
         html2pdf().from(element).set(opt).save();
+    }
+
+    // පෝරමය Submit වූ පසු අයදුම්කරුට WhatsApp පණිවිඩයක් සැකසීම
+    function handleFormSubmit(event) {
+        // පෝරමයේ දුරකථන අංකය ලබා ගැනීම
+        let phoneInput = document.getElementById('phone').value.trim();
+        let nameInput = document.getElementById('fullname').value.trim();
+
+        // දුරකථන අංකයේ මුලට ශ්‍රී ලංකා කේතය (94) එකතු කිරීම (0න් පටන් ගනී නම් 0 ඉවත් කරනු ලැබේ)
+        if (phoneInput.startsWith('0')) {
+            phoneInput = '94' + phoneInput.substring(1);
+        }
+
+        // යැවිය යුතු පණිවිඩය සකස් කිරීම
+        let message = `नमस्कार / வணக்கம் ${nameInput}, කාර්ය සාධන හා බෞද්ධ සමිතිය (බෝවත්තැන්න) වෙත ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි. ස්තුතියි!`;
+        let encodedMessage = encodeURIComponent(message);
+
+        // WhatsApp ලින්ක් එක විවෘත කිරීම (මෙමඟින් ස්වයංක්‍රීයව අදාළ අංකයට මැසේජ් එක යැවීමට ඉඩ සලසයි)
+        let whatsappUrl = `https://wa.me/${phoneInput}?text=${encodedMessage}`;
+        
+        // ටිකක් වේලා දී WhatsApp වෙත යොමු කිරීම (පෝරමය ඊමේල් එකට යෑමට ඉඩ හැරීමට)
+        setTimeout(function() {
+            window.open(whatsappUrl, '_blank');
+        }, 1000);
     }
 </script>
 </body>
