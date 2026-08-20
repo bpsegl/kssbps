@@ -390,13 +390,18 @@
             </div>
         </div>
 
-        <div class="btn-container">
-            <button type="submit" class="btn-submit">අයදුම්පත යොමු කරන්න (Submit)</button>
-            <button type="button" class="btn-print" onclick="window.print()">Print කරන්න</button>
-        </div>
-
+      <div class="btn-container">
+    <button type="submit" class="btn-submit">අයදුම්පත යොමු කරන්න (Submit)</button>
+    <button type="button" class="btn-download" onclick="downloadPDF()">Download PDF</button>
+    <button type="button" class="btn-print" onclick="window.print()">Print කරන්න</button>
+</div>
     </form>
 </div>
-
+<script>
+    function downloadPDF() {
+        // Print window එක open කර PDF ලෙස Save කරගැනීමට සලස්වයි
+        window.print();
+    }
+</script>
 </body>
 </html>
