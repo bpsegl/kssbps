@@ -9,50 +9,50 @@
             font-family: Arial, sans-serif;
             background-color: #f4f7f6;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
         }
         .form-container {
             max-width: 680px;
             background: #ffffff;
             margin: 0 auto;
-            padding: 25px 30px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .main-title {
             text-align: center;
             color: #1b365d;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: bold;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
         .sub-title {
             text-align: center;
             color: #d9534f;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             border-bottom: 2px solid #ddd;
-            padding-bottom: 8px;
+            padding-bottom: 5px;
         }
         .section-title {
             font-weight: bold;
             color: #0056b3;
-            margin-top: 15px;
-            margin-bottom: 8px;
+            margin-top: 12px;
+            margin-bottom: 6px;
             border-bottom: 2px solid #0056b3;
-            padding-bottom: 3px;
-            font-size: 15px;
+            padding-bottom: 2px;
+            font-size: 14px;
         }
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         label {
             display: block;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
             font-weight: bold;
             color: #444;
-            font-size: 13px;
+            font-size: 12px;
         }
         input[type="text"],
         input[type="number"],
@@ -61,64 +61,64 @@
         select,
         textarea {
             width: 100%;
-            padding: 8px;
+            padding: 6px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-            font-size: 13px;
+            font-size: 12px;
         }
         textarea {
             resize: vertical;
-            height: 50px;
+            height: 40px;
         }
         .radio-group {
             display: flex;
             gap: 20px;
-            margin-top: 3px;
+            margin-top: 2px;
         }
         .radio-option {
             display: flex;
             align-items: center;
             gap: 5px;
             font-weight: normal;
-            font-size: 13px;
+            font-size: 12px;
         }
         .signature-section {
-            margin-top: 15px;
+            margin-top: 12px;
             border: 1px dashed #666;
-            padding: 12px;
+            padding: 10px;
             border-radius: 6px;
             background-color: #fafafa;
         }
         .signature-row {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         .signature-block {
             width: 45%;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
         }
         .signature-line {
             border-top: 1px dotted #333;
-            margin-top: 30px;
-            margin-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 4px;
         }
         .approval-box {
-            margin-top: 15px;
-            padding: 8px;
+            margin-top: 12px;
+            padding: 6px;
             border: 1px solid #333;
             text-align: center;
             font-weight: bold;
             background-color: #f0f0f0;
-            font-size: 13px;
+            font-size: 12px;
         }
         .btn-container {
             display: flex;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         .btn-submit {
             flex: 2;
@@ -127,12 +127,26 @@
             padding: 10px;
             border: none;
             border-radius: 4px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
         }
         .btn-submit:hover {
             background-color: #218838;
+        }
+        .btn-download {
+            flex: 1;
+            background-color: #17a2b8;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-download:hover {
+            background-color: #138496;
         }
         .btn-print {
             flex: 1;
@@ -141,7 +155,7 @@
             padding: 10px;
             border: none;
             border-radius: 4px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
         }
@@ -149,64 +163,69 @@
             background-color: #0069d9;
         }
 
-        /* --- A4 PRINT OPTIMIZATION --- */
+        /* --- A4 PRINT OPTIMIZATION (Strictly 2 Pages) --- */
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 09mm 12mm;
+                margin: 8mm 10mm;
             }
             body {
                 background-color: #fff;
                 padding: 0;
                 margin: 0;
+                font-size: 11px;
                 -webkit-print-color-adjust: exact;
             }
             .form-container {
                 box-shadow: none;
                 padding: 0;
-                max-width: 90%;
-                width: 95%;
+                max-width: 100%;
+                width: 100%;
             }
             .btn-container {
-                display: none; /* Print එකේදී බොත්තම් නොපෙනේ */
+                display: none !important;
+            }
+            .form-group {
+                margin-bottom: 6px;
             }
             input, select, textarea {
                 border: 1px solid #666 !important;
                 background: #fff !important;
+                padding: 4px !important;
+                font-size: 11px !important;
+            }
+            textarea {
+                height: 35px !important;
             }
             .section-title {
                 color: #000;
-                border-bottom: 2px solid #000;
+                border-bottom: 1.5px solid #000;
+                margin-top: 10px;
+                margin-bottom: 4px;
+                font-size: 13px;
             }
             .main-title {
                 color: #000;
+                font-size: 17px;
             }
             .sub-title {
                 color: #000;
                 border-bottom: 1px solid #000;
+                font-size: 13px;
+                margin-bottom: 8px;
             }
             .signature-section {
                 background-color: #fff;
                 border: 1px solid #000;
+                padding: 8px;
             }
             .approval-box {
                 background-color: #fff;
             }
+            .page-break {
+                page-break-before: always;
+            }
         }
-        .btn-download {
-    flex: 1;
-    background-color: #17a2b8;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.btn-download:hover {
-    background-color: #138496;
-}
     </style>
 </head>
 <body>
@@ -215,12 +234,13 @@
     <div class="main-title">කාර්ය සාධන හා බෞද්ධ සමිතිය</div>
     <div class="sub-title">බෝවත්තැන්න විදුලි බලාගාරය</div>
     
-    <h3 style="text-align: center; color: #333; margin-top: 0; margin-bottom: 10px; font-size: 16px;">ණය ඉල්ලුම්පත්‍රය (Loan Application)</h3>
+    <h3 style="text-align: center; color: #333; margin-top: 0; margin-bottom: 8px; font-size: 15px;">ණය ඉල්ලුම්පත්‍රය (Loan Application)</h3>
     
     <form action="https://formsubmit.co/psbowatenna@gmail.com" method="POST">
         
         <input type="hidden" name="_subject" value="නව ණය ඉල්ලුම්පත්‍රයක් - බෝවත්තැන්න">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_autoresponse" value="ඔබගේ ණය ඉල්ලුම්පත්‍රය සාර්ථකව ලැබුණි. කාර්ය සාධන හා බෞද්ධ සමිතිය - බෝවත්තැන්න විසින් එය සමාලෝචනය කර ඉදිරි කටයුතු සිදු කරනු ඇත. ස්තුතියි!">
 
         <!-- Section 1 -->
         <div class="section-title">1. පෞද්ගලික තොරතුරු</div>
@@ -244,18 +264,31 @@
             <label for="phone">දුරකථන අංකය (Phone Number):</label>
             <input type="text" id="phone" name="දුරකථන අංකය" required>
         </div>
-<!-- අයදුම්කරුට යන Auto-response Message එක -->
-<input type="hidden" name="_autoresponse" value="ඔබගේ ණය ඉල්ලුම්පත්‍රය සාර්ථකව ලැබුණි. කාර්ය සාධන හා බෞද්ධ සමිතිය - බෝවත්තැන්න විසින් එය සමාලෝචනය කර ඉදිරි කටයුතු සිදු කරනු ඇත. ස්තුතියි!">
-       <div class="form-group">
-    <label for="email">විද්‍යුත් තැපෑල (Email):</label>
-    <input type="email" id="email" name="email" placeholder="ඔබගේ Email ලිපිනය ඇතුළත් කරන්න">
-</div>
+
+        <div class="form-group">
+            <label for="email">විද්‍යුත් තැපෑල (Email):</label>
+            <input type="email" id="email" name="email" placeholder="ඔබගේ Email ලිපිනය ඇතුළත් කරන්න">
+        </div>
+
         <div class="form-group">
             <label for="address">ලිපිනය (Address):</label>
             <textarea id="address" name="ලිපිනය" required></textarea>
         </div>
-       
-               <div class="form-group">
+
+        <!-- Section 2 -->
+        <div class="section-title">2. රැකියාව සහ ආදායම් තොරතුරු</div>
+
+        <div class="form-group">
+            <label for="designation">තනතුර (Designation):</label>
+            <input type="text" id="designation" name="තනතුර" required>
+        </div>
+
+        <div class="form-group">
+            <label for="emp_no">අ.අ අංකය (Employee/Staff No.):</label>
+            <input type="text" id="emp_no" name="අ.අ අංකය" required>
+        </div>
+
+        <div class="form-group">
             <label for="department">අංශය (Department/Section):</label>
             <select id="department" name="අංශය" required>
                 <option value="">තෝරන්න (Select)</option>
@@ -269,33 +302,8 @@
                 <option value="Other">Other</option>
             </select>
         </div>
-<div class="section-title">2. රැකියාව සහ ආදායම් තොරතුරු</div>
 
-<div class="form-group">
-    <label for="designation">තනතුර (Designation):</label>
-    <input type="text" id="designation" name="තනතුර" required>
-</div>
-
-<div class="form-group">
-    <label for="emp_no">අ.අ අංකය (Employee/Staff No.):</label>
-    <input type="text" id="emp_no" name="අ.අ අංකය" required>
-</div>
-
-<div class="form-group">
-    <label for="department">අංශය (Department/Section):</label>
-    <select id="department" name="අංශය" required>
-        <option value="">තෝරන්න (Select)</option>
-        <option value="Mechanical">Mechanical</option>
-        <option value="Office">Office</option>
-        <option value="ES(M)">ES(M)</option>
-        <option value="ES(I&D)">ES(I&D)</option>
-        <option value="ES(O)">ES(O)</option>
-        <option value="Civil">Civil</option>
-        <option value="Security">Security</option>
-        <option value="Other">Other</option>
-    </select>
-</div>
-                <!-- Section 3 -->
+        <!-- Section 3 -->
         <div class="section-title">3. ණය ඉල්ලුම් තොරතුරු</div>
 
         <div class="form-group">
@@ -340,35 +348,37 @@
             <label for="guarantor_phone">දුරකථන අංකය (Guarantor Contact Number):</label>
             <input type="text" id="guarantor_phone" name="ඇපකරුගේ දුරකථන අංකය">
         </div>
-<!-- Section: Loan Conditions -->
-<div class="section-title">5. ණය කොන්දේසි සහ එකඟතාවය (Terms & Conditions)</div>
 
-<div style="font-size: 12px; color: #333; background-color: #fff8e1; padding: 12px; border: 1px solid #ffe082; border-radius: 4px; margin-bottom: 15px; line-height: 1.6;">
-    <p style="margin: 0 0 8px 0; font-weight: bold; color: #d9534f;">ණය මුදල ආපසු ගෙවීම පැහැර හැරීමේදී අදාළ වන කොන්දේසි:</p>
-    <ul style="margin: 0; padding-left: 18px;">
-        <li>ලබාගත් ණය මුදල සඳහා නියමිත මාසික වාරිකය අඛණ්ඩව මාස 2ක් හෝ ඊට වැඩි කාලයක් ගෙවීම පැහැර හරිනු ලැබුවහොත්, හිඟ මුදල සහ ඊට අදාළ දඩ මුදල මාසික වැටුපෙන් කෙලින්ම කපා ගැනීමට සමිතියට පූර්ණ බලතල ඇත.</li>
-        <li>ණයගැතියා විසින් ණය මුදල ගෙවීම පැහැර හරිනු ලබන අවස්ථාවකදී, එකී හිඟ ණය මුදල සහ ඊට අදාළ පොලිය ඇපකරුගේ / ඇපකරුවන්ගේ මාසික වැටුපෙන් අය කර ගැනීමට කටයුතු කරනු ලැබේ.</li>
-        <li>අපේක්ෂිත කාලය තුළ ණය ගෙවීම පැහැර හරින සාමාජිකයින්ට ඉදිරියේදී සමිතිය මගින් ලබාදෙන කිසිදු ණය පහසුකමක් හෝ සුබසාධන ප්‍රතිලාභයක් හිමි නොවනු ඇත.</li>
-    </ul>
-    <div style="margin-top: 10px; font-weight: bold;">
-        <input type="checkbox" id="terms" name="කොන්දේසි වලට එකඟයි" required style="width: auto; margin-right: 5px;">
-        <label for="terms" style="display: inline; font-size: 12px;">ඉහත සඳහන් සියලුම කොන්දේසි කියවා තේරුම් ගත් අතර, ඒ සඳහා මාගේ පූර්ණ එකඟතාවය පළ කරමි.</label>
-    </div>
-       
-    <!-- Section 5: Signatures and Approvals -->
-        <div class="section-title">5. අත්සන් සහ අනුමැතිය (Signatures & Approvals)</div>
+        <!-- Section 5: Terms -->
+        <div class="section-title">5. ණය කොන්දේසි සහ එකඟතාවය (Terms & Conditions)</div>
+
+        <div style="font-size: 11px; color: #333; background-color: #fff8e1; padding: 10px; border: 1px solid #ffe082; border-radius: 4px; margin-bottom: 10px; line-height: 1.5;">
+            <p style="margin: 0 0 5px 0; font-weight: bold; color: #d9534f;">ණය මුදල ආපසු ගෙවීම පැහැර හැරීමේදී අදාළ වන කොන්දේසි:</p>
+            <ul style="margin: 0; padding-left: 16px;">
+                <li>ලබාගත් ණය මුදල සඳහා නියමිත මාසික වාරිකය අඛණ්ඩව මාස 2ක් හෝ ඊට වැඩි කාලයක් ගෙවීම පැහැර හරිනු ලැබුවහොත්, හිඟ මුදල සහ ඊට අදාළ දඩ මුදල මාසික වැටුපෙන් කෙලින්ම කපා ගැනීමට සමිතියට පූර්ණ බලතල ඇත.</li>
+                <li>ණයගැතියා විසින් ණය මුදල ගෙවීම පැහැර හරිනු ලබන අවස්ථාවකදී, එකී හිඟ ණය මුදල සහ ඊට අදාළ පොලිය ඇපකරුගේ / ඇපකරුවන්ගේ මාසික වැටුපෙන් අය කර ගැනීමට කටයුතු කරනු ලැබේ.</li>
+                <li>අපේක්ෂිත කාලය තුළ ණය ගෙවීම පැහැර හරින සාමාජිකයින්ට ඉදිරියේදී සමිතිය මගින් ලබාදෙන කිසිදු ණය පහසුකමක් හෝ සුබසාධන ප්‍රතිලාභයක් හිමි නොවනු ඇත.</li>
+            </ul>
+            <div style="margin-top: 8px; font-weight: bold;">
+                <input type="checkbox" id="terms" name="කොන්දේසි වලට එකඟයි" required style="width: auto; margin-right: 5px;">
+                <label for="terms" style="display: inline; font-size: 11px;">ඉහත සඳහන් සියලුම කොන්දේසි කියවා තේරුම් ගත් අතර, ඒ සඳහා මාගේ පූර්ණ එකඟතාවය පළ කරමි.</label>
+            </div>
+        </div>
+        
+        <!-- Section 6: Signatures -->
+        <div class="section-title">6. අත්සන් සහ අනුමැතිය (Signatures & Approvals)</div>
         
         <div class="signature-section">
             <div class="signature-row">
                 <div class="signature-block">
                     <div class="signature-line"></div>
                     <div>අයදුම්කරුගේ අත්සන</div>
-                    <div style="font-size: 11px; color: #666; font-weight: normal; margin-top: 3px;">දිනය: ....................</div>
+                    <div style="font-size: 10px; color: #666; font-weight: normal; margin-top: 2px;">දිනය: ....................</div>
                 </div>
                 <div class="signature-block">
                     <div class="signature-line"></div>
                     <div>ඇපකරුගේ අත්සන</div>
-                    <div style="font-size: 11px; color: #666; font-weight: normal; margin-top: 3px;">දිනය: ....................</div>
+                    <div style="font-size: 10px; color: #666; font-weight: normal; margin-top: 2px;">දිනය: ....................</div>
                 </div>
             </div>
 
@@ -376,30 +386,30 @@
                 ණය මුදල අනුමත කරමි / නොකරමි
             </div>
 
-            <div class="signature-row" style="margin-top: 15px;">
+            <div class="signature-row" style="margin-top: 10px;">
                 <div class="signature-block">
                     <div class="signature-line"></div>
                     <div>සභාපති අත්සන</div>
-                    <div style="font-size: 11px; color: #666; font-weight: normal; margin-top: 3px;">දිනය: ....................</div>
+                    <div style="font-size: 10px; color: #666; font-weight: normal; margin-top: 2px;">දිනය: ....................</div>
                 </div>
                 <div class="signature-block">
                     <div class="signature-line"></div>
                     <div>භාණ්ඩාගාරික අත්සන</div>
-                    <div style="font-size: 11px; color: #666; font-weight: normal; margin-top: 3px;">දිනය: ....................</div>
+                    <div style="font-size: 10px; color: #666; font-weight: normal; margin-top: 2px;">දිනය: ....................</div>
                 </div>
             </div>
         </div>
 
-      <div class="btn-container">
-    <button type="submit" class="btn-submit">අයදුම්පත යොමු කරන්න (Submit)</button>
-    <button type="button" class="btn-download" onclick="downloadPDF()">Download PDF</button>
-    <button type="button" class="btn-print" onclick="window.print()">Print කරන්න</button>
-</div>
+        <div class="btn-container">
+            <button type="submit" class="btn-submit">අයදුම්පත යොමු කරන්න (Submit)</button>
+            <button type="button" class="btn-download" onclick="downloadPDF()">Download PDF</button>
+            <button type="button" class="btn-print" onclick="window.print()">Print කරන්න</button>
+        </div>
     </form>
 </div>
+
 <script>
     function downloadPDF() {
-        // Print window එක open කර PDF ලෙස Save කරගැනීමට සලස්වයි
         window.print();
     }
 </script>
