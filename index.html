@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ණය ඉල්ලුම්පත්‍රය - කාර්ය සාධන හා බෞද්ධ සමිතිය</title>
+    <!-- html2pdf පුස්තකාලය (Library) එකතු කිරීම -->
+    <script src="https://cdnjs.cloudflare.com/ajax5/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -163,76 +165,16 @@
             background-color: #0069d9;
         }
 
-        /* --- A4 PRINT OPTIMIZATION --- */
         @media print {
-            @page {
-                size: A4 portrait;
-                margin: 10mm 12mm;
-            }
-            body {
-                background-color: #fff;
-                padding: 0;
-                margin: 0;
-                font-size: 11px;
-                -webkit-print-color-adjust: exact;
-            }
-            .form-container {
-                box-shadow: none;
-                padding: 0;
-                max-width: 100%;
-                width: 100%;
-            }
             .btn-container {
                 display: none !important;
-            }
-            .form-group {
-                margin-bottom: 8px;
-            }
-            input, select, textarea {
-                border: 1px solid #666 !important;
-                background: #fff !important;
-                padding: 5px !important;
-                font-size: 11px !important;
-            }
-            textarea {
-                height: 40px !important;
-            }
-            .section-title {
-                color: #000;
-                border-bottom: 1.5px solid #000;
-                margin-top: 12px;
-                margin-bottom: 6px;
-                font-size: 13px;
-            }
-            .main-title {
-                color: #000;
-                font-size: 18px;
-            }
-            .sub-title {
-                color: #000;
-                border-bottom: 1px solid #000;
-                font-size: 14px;
-                margin-bottom: 10px;
-            }
-            .signature-section {
-                background-color: #fff;
-                border: 1px solid #000;
-                padding: 10px;
-            }
-            .approval-box {
-                background-color: #fff;
-            }
-            /* 04 වන කොටසෙන් දෙවන පිටුව ආරම්භ කිරීමට */
-            .page-break-before {
-                page-break-before: always;
-                break-before: page;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="form-container">
+<div class="form-container" id="loanForm">
     <div class="main-title">කාර්ය සාධන හා බෞද්ධ සමිතිය</div>
     <div class="sub-title">බෝවත්තැන්න විදුලි බලාගාරය</div>
     
@@ -244,7 +186,6 @@
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_autoresponse" value="ඔබගේ ණය ඉල්ලුම්පත්‍රය සාර්ථකව ලැබුණි. කාර්ය සාධන හා බෞද්ධ සමිතිය - බෝවත්තැන්න විසින් එය සමාලෝචනය කර ඉදිරි කටයුතු සිදු කරනු ඇත. ස්තුතියි!">
 
-        <!-- PAGE 1 -->
         <!-- Section 1 -->
         <div class="section-title">1. පෞද්ගලික තොරතුරු</div>
         
@@ -334,9 +275,8 @@
             <textarea id="purpose" name="ණය ලබාගන්නා හේතුව"></textarea>
         </div>
 
-        <!-- PAGE 2 (Starts from Section 4) -->
         <!-- Section 4 -->
-        <div class="section-title page-break-before">4. ඇපකරුවන්ගේ තොරතුරු (Guarantor Details) - අවශ්‍ය නම් පමණක්</div>
+        <div class="section-title">4. ඇපකරුවන්ගේ තොරතුරු (Guarantor Details) - අවශ්‍ය නම් පමණක්</div>
 
         <div class="form-group">
             <label for="guarantor_name">ඇපකරුගේ නම (Guarantor Name):</label>
@@ -414,10 +354,17 @@
 
 <script>
     function downloadPDF() {
-        window.print();
-        <a href="https://drive.google.com/file/d/1ae-lfPbPK2UDzsv4GM87fUIZ2Mib3zcl/view?usp=drive_link" download="Loan_Application_Bowatenna.pdf" class="btn-download" style="text-decoration: none; text-align: center; display: inline-block;">
-    PDF ඩවුන්ලෝඩ් කරන්න
-</a>
+        const element = document.getElementById('loanForm');
+        const opt = {
+            margin:       5,
+            filename:     'Loan_Application_Bowatenna.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // html2pdf භාවිතයෙන් සෘජුවම PDF එක ඩවුන්ලෝඩ් කිරීම
+        html2pdf().from(element).set(opt).save();
     }
 </script>
 </body>
