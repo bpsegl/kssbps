@@ -15,13 +15,40 @@
             color: #000;
         }
         .form-container {
+            position: relative;
             max-width: 700px;
             background: #ffffff;
             margin: 0 auto;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
+
+        /* Watermark Styles */
+        .form-container::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background-image: url('EGL NEW.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.08; /* Watermark transparency */
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Ensure form elements stay above the watermark */
+        .form-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
         .main-title {
             text-align: center;
             color: #1b365d;
@@ -70,6 +97,7 @@
             box-sizing: border-box;
             font-size: 11px;
             font-family: inherit;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent to keep watermark visible */
         }
         textarea {
             resize: vertical;
@@ -92,10 +120,9 @@
             border: 1px dashed #666;
             padding: 8px;
             border-radius: 6px;
-            background-color: #fafafa;
+            background-color: rgba(250, 250, 250, 0.9);
         }
         
-        /* Digital Signature Canvas Styling */
         .signature-pad-container {
             position: relative;
             border: 1px solid #b5b5b5;
@@ -142,7 +169,7 @@
             border: 1px solid #333;
             text-align: center;
             font-weight: bold;
-            background-color: #f0f0f0;
+            background-color: rgba(240, 240, 240, 0.9);
             font-size: 11px;
         }
         .btn-container {
@@ -198,6 +225,7 @@
             }
             input, select, textarea {
                 border: 1px solid #444 !important;
+                background-color: transparent !important;
             }
             .signature-pad-container {
                 border: 1px solid #000 !important;
@@ -323,7 +351,7 @@
 
         <div class="section-title">5. ණය කොන්දේසි සහ එකඟතාවය (Terms & Conditions)</div>
 
-        <div style="font-size: 10px; color: #333; background-color: #fff8e1; padding: 8px; border: 1px solid #ffe082; border-radius: 4px; margin-bottom: 8px; line-height: 1.4;">
+        <div style="font-size: 10px; color: #333; background-color: rgba(255, 248, 225, 0.9); padding: 8px; border: 1px solid #ffe082; border-radius: 4px; margin-bottom: 8px; line-height: 1.4;">
             <p style="margin: 0 0 4px 0; font-weight: bold; color: #d9534f;">ණය මුදල ආපසු ගෙවීම පැහැර හැරීමේදී අදාළ වන කොන්දේසි:</p>
             <ul style="margin: 0; padding-left: 15px;">
                 <li>ලබාගත් ණය මුදල සඳහා නියමිත මාසික වාරිකය අඛණ්ඩව මාස 2ක් හෝ ඊට වැඩි කාලයක් ගෙවීම පැහැර හරිනු ලැබුවහොත්, හිඟ මුදල සහ ඊට අදාළ දඩ මුදල මාසික වැටුපෙන් කෙලින්ම කපා ගැනීමට සමිතියට පූර්ණ බලතල ඇත.</li>
@@ -347,7 +375,6 @@
                         <canvas id="applicantSignature" class="signature-canvas"></canvas>
                     </div>
                     <button type="button" class="clear-btn" onclick="clearApplicantSign()">මකන්න (Clear)</button>
-                    <!-- Hidden input to carry signature image data if submitted -->
                     <input type="hidden" name="අයදුම්කරුගේ_අත්සන_දත්ත" id="applicantSignInput">
                     <div style="font-size: 9px; color: #666; font-weight: normal; margin-top: 2px;">දිනය: ....................</div>
                 </div>
@@ -390,14 +417,12 @@
 </div>
 
 <script>
-    // Initialize Signature Pads
     var applicantPad, guarantorPad;
 
     window.addEventListener('DOMContentLoaded', () => {
         const canvasApp = document.getElementById('applicantSignature');
         const canvasGuar = document.getElementById('guarantorSignature');
 
-        // Resize canvas resolution to match container
         function resizeCanvas(canvas) {
             const ratio = Math.max(window.devicePixelRatio || 1, 1);
             canvas.width = canvas.offsetWidth * ratio;
@@ -420,7 +445,6 @@
         guarantorPad.clear();
     }
 
-    // Capture signatures into hidden inputs before submitting
     function prepareSignatureData(event) {
         if (!applicantPad.isEmpty()) {
             document.getElementById('applicantSignInput').value = applicantPad.toDataURL();
