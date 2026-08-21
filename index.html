@@ -180,8 +180,8 @@
     
     <h3 style="text-align: center; color: #333; margin-top: 0; margin-bottom: 8px; font-size: 15px;">ණය ඉල්ලුම්පත්‍රය (Loan Application)</h3>
     
-    <!-- මෙහි onsubmit ඉවත් කර, FormSubmit එක සාමාන්‍ය පරිදි යෑමට සලස්වා ඇත -->
-    <form action="https://formsubmit.co/psbowatenna@gmail.com" method="POST" onsubmit="openWhatsApp(event)">
+    <!-- පෝරමය FormSubmit හරහා සෘජුවම ඊමේල් වෙත යැවීමට සකසා ඇත -->
+    <form action="https://formsubmit.co/psbowatenna@gmail.com" method="POST">
         
         <input type="hidden" name="_subject" value="නව ණය ඉල්ලුම්පත්‍රයක් - බෝවත්තැන්න">
         <input type="hidden" name="_template" value="table">
@@ -205,8 +205,8 @@
         </div>
 
         <div class="form-group">
-            <label for="phone">දුරකථන අංකය (WhatsApp අංකය ලෙස ඇතුළත් කරන්න):</label>
-            <input type="text" id="phone" name="දුරකථන අංකය" placeholder="උදා: 0771234567" required>
+            <label for="phone">දුරකථන අංකය (Phone Number):</label>
+            <input type="text" id="phone" name="දුරකථන අංකය" required>
         </div>
 
         <div class="form-group">
@@ -353,7 +353,7 @@
 </div>
 
 <script>
-    // PDF ඩවුන්ලෝඩ් කිරීම
+    // PDF ඩවුන්ලෝඩ් කිරීමේ කාර්යය පමණක් මෙහි ඉතිරි කර ඇත
     function downloadPDF() {
         const element = document.getElementById('loanForm');
         const opt = {
@@ -364,24 +364,6 @@
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
         html2pdf().from(element).set(opt).save();
-    }
-
-    // ඊමේල් එකත් යන ගමන් WhatsApp එක විවෘත කිරීම
-    function openWhatsApp(event) {
-        let phoneInput = document.getElementById('phone').value.trim();
-        let nameInput = document.getElementById('fullname').value.trim();
-
-        if (phoneInput.startsWith('0')) {
-            phoneInput = '94' + phoneInput.substring(1);
-        }
-
-        let message = `வணக்கம் / ආයුබෝවන් ${nameInput}, කාර්ය සාධන හා බෞද්ධ සමිතිය (බෝවත්තැන්න) වෙත ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි. ස්තුතියි!`;
-        let encodedMessage = encodeURIComponent(message);
-
-        let whatsappUrl = `https://wa.me/${phoneInput}?text=${encodedMessage}`;
-        
-        // අලුත් ටැබ් එකකින් WhatsApp ලින්ක් එක විවෘත කිරීම (මෙමඟින් FormSubmit ඊමේල් එක යාම වැළකෙන්නේ නැත)
-        window.open(whatsappUrl, '_blank');
     }
 </script>
 </body>
