@@ -38,12 +38,11 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            opacity: 0.08; /* Watermark transparency */
+            opacity: 0.08;
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Ensure form elements stay above the watermark */
         .form-container > * {
             position: relative;
             z-index: 1;
@@ -97,7 +96,7 @@
             box-sizing: border-box;
             font-size: 11px;
             font-family: inherit;
-            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent to keep watermark visible */
+            background-color: rgba(255, 255, 255, 0.9);
         }
         textarea {
             resize: vertical;
@@ -241,10 +240,12 @@
     
     <h3 style="text-align: center; color: #333; margin-top: 0; margin-bottom: 8px; font-size: 14px;">ණය ඉල්ලුම්පත්‍රය (Loan Application)</h3>
     
-    <form id="loanForm" action="https://formsubmit.co/psbowatenna@gmail.com" method="POST" onsubmit="prepareSignatureData(event)">
+    <form id="loanForm" action="https://formsubmit.co/psbowatenna@gmail.com" method="POST" onsubmit="prepareFormSubmission(event)">
         
         <input type="hidden" name="_subject" value="නව ණය ඉල්ලුම්පත්‍රයක් - බෝවත්තැන්න">
         <input type="hidden" name="_template" value="table">
+        <!-- FormSubmit එකෙන් ඊමේල් එක ලැබෙන විට Reply කළ හැකි වන පරිදි යොදන ලදී -->
+        <input type="hidden" name="_replyto" id="replyToInput">
         <input type="hidden" name="_autoresponse" value="ඔබගේ ණය ඉල්ලුම්පත්‍රය සාර්ථකව ලැබුණි. කාර්ය සාධන හා බෞද්ධ සමිතිය - බෝවත්තැන්න විසින් එය සමාලෝචනය කර ඉදිරි කටයුතු සිදු කරනු ඇත. ස්තුතියි!">
 
         <!-- ================= 1 වන පිටුව (Page 1) ================= -->
@@ -445,7 +446,15 @@
         guarantorPad.clear();
     }
 
-    function prepareSignatureData(event) {
+    // Capture signatures and user email for reply-to before submitting
+    function prepareFormSubmission(event) {
+        // Set user's email into FormSubmit reply-to field so you can reply directly
+        const userEmail = document.getElementById('email').value;
+        if (userEmail) {
+            document.getElementById('replyToInput').value = userEmail;
+        }
+
+        // Handle Signatures
         if (!applicantPad.isEmpty()) {
             document.getElementById('applicantSignInput').value = applicantPad.toDataURL();
         }
