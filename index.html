@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ණය ඉල්ලුම්පත්‍රය - කාර්ය සාධන හා බෞද්ධ සමිතිය</title>
+    <!-- Direct PDF Download සඳහා html2pdf.js Library එක එකතු කිරීම -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -222,7 +224,6 @@
             .approval-box {
                 background-color: #fff;
             }
-            /* 04 වන කොටසෙන් දෙවන පිටුව ආරම්භ කිරීමට */
             .page-break-before {
                 page-break-before: always;
                 break-before: page;
@@ -232,7 +233,7 @@
 </head>
 <body>
 
-<div class="form-container">
+<div class="form-container" id="pdf-content">
     <div class="main-title">කාර්ය සාධන හා බෞද්ධ සමිතිය</div>
     <div class="sub-title">බෝවත්තැන්න විදුලි බලාගාරය</div>
     
@@ -404,9 +405,9 @@
             </div>
         </div>
 
-        <div class="btn-container">
+        <div class="btn-container" id="btn-group">
             <button type="submit" class="btn-submit">අයදුම්පත යොමු කරන්න (Submit)</button>
-            <button type="button" class="btn-download" onclick="downloadPDF()">Download PDF</button>
+            <button type="button" class="btn-download" onclick="downloadPDF()">Direct Download PDF</button>
             <button type="button" class="btn-print" onclick="window.print()">Print කරන්න</button>
         </div>
     </form>
@@ -414,7 +415,23 @@
 
 <script>
     function downloadPDF() {
-        window.print();
+        // PDF එකට Buttons නොපෙනෙන සේ Hide කිරීම
+        document.getElementById('btn-group').style.display = 'none';
+        
+        var element = document.getElementById('pdf-content');
+        var opt = {
+            margin:       [10, 10, 10, 10],
+            filename:     'Loan_Application_Bowatenna.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Direct Download කිරීම
+        html2pdf().set(opt).from(element).save().then(function(){
+            // Download වී අවසන් වූ පසු Buttons නැවත පෙන්වීම
+            document.getElementById('btn-group').style.display = 'flex';
+        });
     }
 </script>
 </body>
